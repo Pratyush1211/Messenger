@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         height:50,
         flex:1,
         marginRight:15,
-        // borderColor:'transparent',
+        borderColor:'transparent',
         borderWidth:1,
         padding:10,
         color:'grey',
