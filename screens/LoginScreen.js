@@ -16,13 +16,17 @@ export default function LoginScreen({navigation}) {
            }
     
     });
-    
+
     return unsubscribe;
     }, []);
 
     const SignIn = () => {
+        auth
+        .SignInWithEmailAndPassword(email,password)
+        .catch(error=>alert(error));
 
-    }
+
+    };
 
     return (
         <KeyboardAvoidingView behaviour="padding" style={styles.Container}>
@@ -46,6 +50,7 @@ export default function LoginScreen({navigation}) {
                     type="password"
                     value={password}
                     onChangeText={(text) => setPassword(text)}
+                    onSubmitEditing={SignIn}
                 />
             </View>
             <Button containerStyle={styles.button} onPress={SignIn} title="Login" />
