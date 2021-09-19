@@ -34,9 +34,10 @@ const HomeScreen = ({ navigation }) => {
         navigation.setOptions({
             title: "Messenger",
             headerStyle: { backgroundColor: '#fff' },
-            headerTitleStyle: { color: '#000', textAlign: 'center', marginLeft: 20, flex: 1 },
+            headerTitleStyle: { color: '#000' },
             headerTintColor: "black",
-            headerLeft: () => (<View style={{ marginLeft: 0, marginRight: 10 }}>
+            
+            headerLeft: () => (<View style={{ marginLeft: 0,marginRight:15 }}>
                 <TouchableOpacity onPress={SignOutUser}>
                     <Avatar
                         rounded

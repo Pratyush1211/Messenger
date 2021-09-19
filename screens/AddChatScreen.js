@@ -26,8 +26,9 @@ export default function AddChatScreen({navigation}) {
             title:"Add a new Chat",
             headerBackTitle:"Chats",
             headerStyle:{backgroundColor:'#fff'},
-            headerTitleStyle:{color:'#000',textAlign:'center',marginLeft:20,flex:1},
+            headerTitleStyle:{color:'#000'},
             headerTintColor:"black",
+            headerTitleAlign:'center'
         });
            
           
