@@ -46,7 +46,7 @@ export default function RegisterScreen({ navigation }) {
                 />
                 <Input
                     placeholder="Enter Email"
-                    type="email"
+                    textContentType="emailAddress"
                     value={email}
                     onChangeText={(text) => setEmail(text)}
                 />
