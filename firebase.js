@@ -1,10 +1,12 @@
 import  firebase from "firebase";
 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "firebase/auth";
 //import "firebase/database";
 import "firebase/firestore";
 //import "firebase/functions";
 //import "firebase/storage";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyAEk596DHKa1QA2WlVhR6yY3wy3aT3vdjc",

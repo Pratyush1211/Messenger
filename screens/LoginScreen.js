@@ -22,8 +22,9 @@ export default function LoginScreen({navigation}) {
 
     const SignIn = () => {
         auth
-        .SignInWithEmailAndPassword(email,password)
-        .catch(error=>alert(error));
+        .signInWithEmailAndPassword(email,password)
+        .catch(error=>alert("Register on App first or enter the credential carefully "));
+        console.log(auth)
 
 
     };
