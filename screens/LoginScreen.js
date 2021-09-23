@@ -4,27 +4,51 @@ import { Button, Input, Image } from 'react-native-elements'
 import { StatusBar } from 'expo-status-bar';
 import { auth } from '../firebase';
 
+// helpers
+import post from '../services/http/post'
+import write from '../services/localstorage/write'
+import read from '../services/localstorage/read'
+
 export default function LoginScreen({navigation}) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     useEffect(() => {
-       const unsubscribe = auth.onAuthStateChanged((authUser)=>{
-           if(authUser){
-               navigation.replace("Home")
-           }
-    
-    });
-
-    return unsubscribe;
+        async function checkLogin(){
+            try{
+                let token = await read('token')
+                if(token){
+                    console.log('Token Found!!')
+                    navigation.replace("Home")
+                } 
+            } catch(err){
+                console.log('Token Not Found')
+            }
+        }
+        checkLogin()
     }, []);
 
-    const SignIn = () => {
-        auth
-        .SignInWithEmailAndPassword(email,password)
-        .catch(error=>alert(error));
+    const SignIn = async() => {
 
+        try{
+            let data = {
+                email: email,
+                password: password
+            }
+            let res = await post('/auth/login', data)
+            if(res.error){
+                throw new Error(res.error.message)
+            } else if(res.message == "success"){
+                console.log('Response ', res)
+                await write('token', res.accessToken)
+                navigation.replace("Home")
+            }
+            
+        } catch(err){
+            console.log('Error ', err)
+            alert('Cannot Login!!')
+        }
 
     };
 
