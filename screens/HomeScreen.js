@@ -6,11 +6,12 @@ import { auth, db } from '../firebase';
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
 import { StatusBar } from 'expo-status-bar';
 
-
+// helpers
+import get from '../services/http/get'
+import write from '../services/localstorage/write'
+import read from '../services/localstorage/read'
 
 const HomeScreen = ({ navigation }) => {
-
-
     const SignOutUser = () => {
         auth.signOut().then(() => {
             navigation.replace("Login");
@@ -20,14 +21,19 @@ const HomeScreen = ({ navigation }) => {
     const [chats, setchats] = useState([])
 
     useEffect(() => {
-        const unsubscribe = db.collection('chats').onSnapshot((snapshot) => 
-            setchats(snapshot.docs.map(doc => ({
-                id: doc.id,
-                data: doc.data(),
-            }))
-            )
-        );
-        return unsubscribe;
+
+        async function fetchData(){
+            try{
+                let token = await read('token')
+                let email = await read('email')
+                let res = await get(`/chat/chatlist?userId=${email}`, token)
+                setchats(res.data)
+            } catch(err){
+                console.log('Error ', err)
+                alert('Error ', err)
+            }
+        }
+        fetchData()
     }, []);
 
     useLayoutEffect(() => {
@@ -79,9 +85,11 @@ const HomeScreen = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
             <StatusBar style="auto" />
-            {chats.map(({id,data:{chatName}})=>(
-                <Customlistitem key={id} chatName={chatName} enterChat={enterChat}/>
-            ))}
+            {
+                chats.map((email)=>(
+                    <Customlistitem key={email} chatName={email} enterChat={enterChat}/>
+                ))
+            }
             
         </ScrollView>
     )

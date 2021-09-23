@@ -18,12 +18,13 @@ export default function LoginScreen({navigation}) {
         async function checkLogin(){
             try{
                 let token = await read('token')
-                if(token){
-                    console.log('Token Found!!')
+                let email = await read('email')
+                if(token && email){
+                    console.log('Token and Email Found!!')
                     navigation.replace("Home")
                 } 
             } catch(err){
-                console.log('Token Not Found')
+                console.log('Token/ Email Not Found')
             }
         }
         checkLogin()
@@ -42,6 +43,7 @@ export default function LoginScreen({navigation}) {
             } else if(res.message == "success"){
                 console.log('Response ', res)
                 await write('token', res.accessToken)
+                await write('email', res.email)
                 navigation.replace("Home")
             }
             
