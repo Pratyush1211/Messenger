@@ -35,8 +35,7 @@ const HomeScreen = ({ navigation }) => {
             title: "Messenger",
             headerStyle: { backgroundColor: '#fff' },
             headerTitleStyle: { color: '#000' },
-            headerTintColor: "black",
-            
+            headerTintColor: "black",          
             headerLeft: () => (<View style={{ marginLeft: 0,marginRight:15 }}>
                 <TouchableOpacity onPress={SignOutUser}>
                     <Avatar

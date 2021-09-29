@@ -66,7 +66,6 @@ export default function ChatScreen({ navigation, route }) {
 
         });
 
-
     }, [navigation]);
 
    

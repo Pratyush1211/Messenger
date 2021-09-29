@@ -9,6 +9,7 @@ import { db } from '../firebase';
 export default function AddChatScreen({navigation}) {
 
     const [input, setinput] = useState("")
+
     const CreateChat= async ()=>{
         await db
         .collection('chats')
@@ -21,6 +22,8 @@ export default function AddChatScreen({navigation}) {
         .catch((error)=>alert(error));
 
     };
+
+    
     useLayoutEffect(()=>{
         navigation.setOptions({
             title:"Add a new Chat",

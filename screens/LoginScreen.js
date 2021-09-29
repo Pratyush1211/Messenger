@@ -13,8 +13,7 @@ export default function LoginScreen({navigation}) {
        const unsubscribe = auth.onAuthStateChanged((authUser)=>{
            if(authUser){
                navigation.replace("Home")
-           }
-    
+           } 
     });
 
     return unsubscribe;
